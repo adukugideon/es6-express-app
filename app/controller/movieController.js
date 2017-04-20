@@ -1,8 +1,10 @@
 import Movie from '../model/movieModel';
 
+const movie = new Movie();
+
 exports.addMovie=(req, res) =>{
 
-const movie = new Movie();
+
    movie.title=req.body.title;
   movie.genre=req.body.genre;
   movie.year=req.body.year;
@@ -18,21 +20,21 @@ const movie = new Movie();
  }
 
  exports.getMovies=(req, res)=>{
-     const movies = new Movie();
+    
      let query = {};
 
         if(req.query.genre)
         {
             query.genre = req.query.genre;
         }
-        Movie.find(query, (err,movies)=>{
+        Movie.find(query, (err,movie)=>{
 
             if(err)
                 res.status(500).send(err);
             else {
 
                
-                res.json(movies);
+                res.json(movie);
             }
         });
  }
