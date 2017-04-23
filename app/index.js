@@ -18,3 +18,5 @@ const Server = App.listen(Config.PORT, (err)=>{
     console.log('Express api is running on '+ Config.PORT);
 }
 );
+
+module.exports=App;
