@@ -1,4 +1,4 @@
-import Mongoose from 'mongoose';
+const Mongoose=require('mongoose');
 const MovieSchema = new Mongoose.Schema({
  title: {type:String},
 genre: {type:String},

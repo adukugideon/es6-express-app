@@ -1,4 +1,4 @@
-import Movie from '../model/movieModel';
+const Movie=require ('../model/movieModel');
 
 const movie = new Movie();
 
