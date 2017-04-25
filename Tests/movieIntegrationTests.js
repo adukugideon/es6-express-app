@@ -1,4 +1,4 @@
-var should = require('should'),
+const should = require('should'),
     request = require('supertest'),
     app = require('../index.js'),
     mongoose = require('mongoose'),
@@ -6,9 +6,9 @@ var should = require('should'),
     agent = request.agent(app);
 
 
-describe('Movie Test', function(){
-    it('Should allow a movie to be posted and return a read and _id', function(done){
-        var moviePost = {title:'new Movie', year:1988, genre:'Fiction'};
+describe('Movie Crud Test', function(){
+    it('Should allow a movie to be posted and return a viewed and _id', function(done){
+let moviePost = {title:'new Movie', year:1988, genre:'Action'};
 
         agent.post('/api/movies')
             .send(moviePost)

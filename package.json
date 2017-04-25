@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "An express restful api with mongo in es6",
   "scripts": {
-    "test": "mocha app/test/movieControllerTest.js",
-    "start": "nodemon starter.js"
+    "test": "gulp test",
+    "start": "gulp"
   },
   "keywords": [
     "Express",
@@ -13,17 +13,22 @@
     "Restful"
   ],
   "author": "Gideon Aduku",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "mongoose": "^4.9.3",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^4.3.0",
+    "gulp-nodemon": "^2.2.1",
+    "mongoose": "^4.9.6",
     "nodemon": "^1.11.0",
     "should": "^11.2.1",
     "sinon": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1"
+    "babel-preset-es2015": "^6.24.1",
+    "gulp-env": "^0.4.0",
+    "supertest": "^3.0.0"
   }
 }
