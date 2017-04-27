@@ -14,7 +14,7 @@ else{
     db= mongoose.connect('mongodb://localhost/movieAPI');
 }
 
-const Book = require('./models/movieModel');
+const Movie = require('./models/movieModel');
 
 const App = express();
 
@@ -23,7 +23,7 @@ const port = process.env.PORT || 3000;
 App.use(bodyParser.urlencoded({extended:true}));
 App.use(bodyParser.json());
 
-movieRouter = require('./Routes/movieRoutes')(Book);
+movieRouter = require('./Routes/movieRoutes')(Movie);
 
 
 App.use('/api/movies', movieRouter); 
