@@ -8,7 +8,7 @@ describe('Movie Controller Tests:', ()=>{
 
             let req = {
                 body: {
-                    author: 'Jon'
+                    genre: 'Comedy'
                 }
             }
 
