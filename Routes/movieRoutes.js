@@ -1,79 +1,26 @@
-const express = require('express');
-const routes = (Movie)=>{
-   let movieRouter = express.Router();
+import express from 'express';
+import movieController  from '../Controllers/movieController';
+import Movie from '../models/movieModel.js'
 
-   let movieController = require('../Controllers/movieController')(Movie)
-    movieRouter.route('/')
-        .post(movieController.post)
-        .get(movieController.get);
+const movieRouter = express.Router();
+movieRouter.route('/')
+  /** GET  - Get list of movies */
+  .get(movieController.list)
 
-    movieRouter.use('/:movieId', (req,res,next)=>{
-        Movie.findById(req.params.movieId, (err,movie)=>{
-            if(err)
-                res.status(500).send(err);
-            else if(movie)
-            {
-                req.movie = movie;
-                next();
-            }
-            else
-            {
-                res.status(404).send('no movie found');
-            }
-        });
-    });
-    movieRouter.route('/:movieId')
-        .get((req,res)=>{
+  /** POST /api/movies - Create new movie */
+  .post( movieController.postMovie);
 
-            let returnMovie = req.movie.toJSON();
+movieRouter.route('/:movieId')
+  /** GET /api/movies/:movieId - Get movie */
+  .get(movieController.getMovie)
 
-            returnMovie.links = {};
-            let newLink = 'http://' + req.headers.host + '/api/movies/?genre=' + returnMovie.genre;
-            returnMovie.links.FilterByThisGenre = newLink.replace(' ', '%20');
-            res.json(returnMovie);
+  /** PUT /api/movies/:movieId - Update movie */
+  .put( movieController.update)
 
-        })
-        .put((req,res)=>{
-            req.movie.title = req.body.title;
-            req.movie.genre = req.body.genre;
-            req.movie.year = req.body.year;
-            req.movie.rating = req.body.rating;
-            req.movie.viewed = req.body.viewed;
-            req.movie.save((err)=>{
-                if(err)
-                    res.status(500).send(err);
-                else{
-                    res.json(req.movie);
-                }
-            });
-        })
-        .patch((req,res)=>{
-            if(req.body._id)
-                delete req.body._id;
+  /** DELETE /api/movies/:movieId - Delete movie */
+  .delete(movieController.remove);
 
-            for(var p in req.body)
-            {
-                req.movie[p] = req.body[p];
-            }
-
-            req.movie.save((err)=>{
-                if(err)
-                    res.status(500).send(err);
-                else{
-                    res.json(req.movie);
-                }
-            });
-        })
-        .delete((req,res)=>{
-            req.movie.remove((err)=>{
-                if(err)
-                    res.status(500).send(err);
-                else{
-                    res.status(204).send('Removed');
-                }
-            });
-        });
-    return movieRouter;
-};
-
-module.exports = routes;
+/** Load movie when API with movieId route parameter is hit */
+movieRouter.param('movieId', movieController.load);
+ 
+export default movieRouter;

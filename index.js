@@ -1,20 +1,8 @@
-const express = require('express'),
-    mongoose = require('mongoose'),
-    bodyParser = require('body-parser');
-
-
-let db;
-
-if(process.env.ENV == 'Test'){
-
-    db = mongoose.connect('mongodb://localhost/movieAPI_test');
-}
-
-else{
-    db= mongoose.connect('mongodb://localhost/movieAPI');
-}
-
-const Movie = require('./models/movieModel');
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import movieRouter from './Routes/movieRoutes';
+import config from './config';
 
 const App = express();
 
@@ -23,18 +11,25 @@ const port = process.env.PORT || 3000;
 App.use(bodyParser.urlencoded({extended:true}));
 App.use(bodyParser.json());
 
-movieRouter = require('./Routes/movieRoutes')(Movie);
+//const movieRouter = require('./Routes/movieRoutes');
+Promise = require('bluebird'); 
 
-
+// plugin bluebird promise in mongoose
+mongoose.Promise = Promise;
+const mongoUri = config.mongo.host;
+mongoose.connect(mongoUri, { server: { socketOptions: { keepAlive: 1 } } });
+mongoose.connection.on('error', () => {
+  throw new Error(`unable to connect to database: ${mongoUri}`);
+});
 App.use('/api/movies', movieRouter); 
 
 
-App.get('/', function(req, res){
+App.get('/', (req, res)=>{
     res.send('welcome to my the movie API!');
 });
 
-App.listen(port, function(){
+App.listen(port, ()=>{
     console.log('Gulp is running my app on  PORT: ' + port);
 });
 
-module.exports = App;
+export default App;
