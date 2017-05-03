@@ -12,14 +12,14 @@ describe('Movie Controller Tests:', ()=>{
                 }
             }
 
-        let res = {
+            let res = {
                 status: Sinon.spy(),
                 send: Sinon.spy()
             }
 
-         //  let movieController = require('../controllers/movieController')(Movie);
-
-            movieController.postMovie(req,res);
+       
+           let next ={};
+            movieController.postMovie(req,res, next);
 
             res.status.calledWith(400).Should.equal(true, 'Bad Status ' + res.status.args[0][0]);
             res.send.calledWith('Title is required').Should.equal(true);
