@@ -1,6 +1,6 @@
 import Should from 'should';
 import Sinon from 'sinon';
-import movieController from '../controllers/movieController';
+import movieController from '../Controllers/movieController';
 describe('Movie Controller Tests:', ()=>{
     describe('Post', ()=>{
         it('should not allow an empty title on post',()=>{
