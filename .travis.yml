@@ -8,3 +8,5 @@ install:
   - npm install -g gulp
 script:
   - npm test
+services:
+  - mongodb
