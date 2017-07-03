@@ -1,15 +1,15 @@
-import Promise from 'bluebird';
-import mongoose from 'mongoose';
-import APIError from '../helper/APIError';
-   const Schema = mongoose.Schema;
+const Promise =require('bluebird');
+const  mongoose =require('mongoose');
+const  APIError =require('../helper/APIError');
+const Schema = mongoose.Schema;
 
 const movieModel = new Schema({
-   title: {type:String},
-genre: {type:String},
+title: {type:String, trim:true},
+genre: {type:String, trim:true},
 year: {type:Number},
 rating:{type:Number},
 viewed: {type: Boolean, default:false},
- postedOn: {
+postedOn: {
     type: Date,
     default: Date.now
   }

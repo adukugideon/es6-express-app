@@ -1,13 +1,13 @@
-import should from 'should';
-import request from 'supertest';
-import app from '../index.js';
-import mongoose from 'mongoose';
-import Movie from '../models/movieModel';
-const agent = request.agent(app);
+const should =require('should');
+const request =require('supertest');
+const app =require('../index.js');
+const mongoose =require('mongoose');
+const Movie =require('../models/movieModel');
+const agent =request.agent(app);
 
 describe('Movie Crud Test', ()=>{
     it('Should allow a movie to be posted and return a viewed and _id',(done)=>{
-const moviePost = {title:'new Movie', year:1988, genre:'Action'};
+const moviePost =require({title:'new Movie', year:1988, genre:'Action'});
 
         agent.post('/api/movies')
             .send(moviePost)

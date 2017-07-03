@@ -1,6 +1,6 @@
-import Should from 'should';
-import Sinon from 'sinon';
-import movieController from '../Controllers/movieController';
+const Should =require('should') ;
+const Sinon =require('sinon');
+const movieController= require( '../Controllers/movieController');
 describe('Movie Controller Tests:', ()=>{
     describe('Post', ()=>{
         it('should not allow an empty title on post',()=>{

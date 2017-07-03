@@ -1,4 +1,4 @@
-import Movie from '../models/movieModel.js'
+const Movie=require( '../models/movieModel.js')/
 
 function load(req, res, next, id) {
  Movie.get(id)
@@ -12,9 +12,7 @@ function getMovie(req, res) {
   return res.json(req.movie);
 }
 function  postMovie(req, res, next) {
-    
-   let movie = new Movie(req.body);
- 
+ const movie = req.movie;
    movie.save()
     .then(movie => res.json(movie))
     .catch(e => next(e));
@@ -23,13 +21,12 @@ function  postMovie(req, res, next) {
 
 function update(req, res, next) {
   const movie = req.movie;
-
     movie.title = req.body.title;
     movie.genre = req.body.genre;
     movie.year = req.body.year;
     movie.rating = req.body.rating;
     movie.viewed = req.body.viewed;
-  movie.save()
+    movie.save()
     .then(savedMovie => res.json(savedMovie))
     .catch(e => next(e));
 }

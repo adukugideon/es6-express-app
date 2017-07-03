@@ -1,6 +1,6 @@
-import express from 'express';
-import movieController  from '../Controllers/movieController';
-import Movie from '../models/movieModel.js'
+const express =require('express') ;
+const movieController  =require('../Controllers/movieController');
+const Movie =require('../models/movieModel.js') 
 
 const movieRouter = express.Router();
 movieRouter.route('/')
